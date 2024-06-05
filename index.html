@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Term Final</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes bgMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+
+        body {
+            font-family: Papyrus, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a51212, #f26063);
+            background-size: 400% 400%;
+            animation: bgMove 15s infinite linear, fadeIn 2s ease-in;
+            margin: 0;
+            padding: 0;
+            color: white;
+            position: relative;
+        }
+
+       
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: slideIn 1s ease-in-out;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2.5em;
+            animation: fadeIn 1s ease-in, pulse 2s infinite;
+        }
+
+        .question {
+            margin: 20px 0;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .question p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 10px 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            background: #ff4e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            animation: pulse 3s infinite;
+        }
+
+        .submit-btn:hover {
+            background: #c72c2c;
+            transform: scale(1.05);
+        }
+
+        .result {
+            display: none;
+            font-size: 1.5em;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .pass {
+            color: #28a745;
+        }
+
+        .hiatus {
+            color: #dc3545;
+        }
+    </style>
+    <script>
+        function gradeQuiz() {
+            const questions = document.querySelectorAll('.question');
+            let score = 0;
+
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === 'correct') {
+                    score++;
+                }
+            });
+
+            const resultText = document.querySelector('.result');
+            if (score >= 18) {
+                resultText.innerText = `You scored ${score} out of 25. PASS! 🎉`;
+                resultText.classList.add('pass');
+                resultText.classList.remove('hiatus');
+            } else {
+                resultText.innerText = `You scored ${score} out of 25. HIATUS! 😢`;
+                resultText.classList.add('hiatus');
+                resultText.classList.remove('pass');
+            }
+            resultText.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Spring Term Final</h1>
+        <form id="quiz">
+            <div class="question">
+                <p>1. What day was The Incident?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q1" value="incorrect"> August 22</li>
+                    <li><input type="radio" name="q1" value="correct"> August 23</li>
+                    <li><input type="radio" name="q1" value="incorrect"> August 24</li>
+                    <li><input type="radio" name="q1" value="incorrect"> January 1st</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>2. What is the Wordle you should never forget?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q2" value="correct"> Arrow</li>
+                    <li><input type="radio" name="q2" value="incorrect"> Candy</li>
+                    <li><input type="radio" name="q2" value="incorrect"> China</li>
+                    <li><input type="radio" name="q2" value="incorrect"> Creep</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>3. What breed of cat is on the bucketlist?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q3" value="incorrect"> Tabby</li>
+                    <li><input type="radio" name="q3" value="incorrect"> Birman</li>
+                    <li><input type="radio" name="q3" value="incorrect"> Baykus</li>
+                    <li><input type="radio" name="q3" value="correct"> British Shorthair</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>4. What is the name of the cat from question 3?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q4" value="incorrect"> Morning</li>
+                    <li><input type="radio" name="q4" value="incorrect"> Devious</li>
+                    <li><input type="radio" name="q4" value="correct"> Mornivious</li>
+                    <li><input type="radio" name="q4" value="incorrect"> Aaron</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>5. Do normal people say they are normal?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q5" value="correct"> No</li>
+                    <li><input type="radio" name="q5" value="incorrect"> Sometimes</li>
+                    <li><input type="radio" name="q5" value="incorrect"> Maybe</li>
+                    <li><input type="radio" name="q5" value="incorrect"> Yes</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>6. What show is on the agenda after Monster?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q6" value="incorrect"> Saiki K</li>
+                    <li><input type="radio" name="q6" value="correct"> Code Geass</li>
+                    <li><input type="radio" name="q6" value="incorrect"> MHA</li>
+                    <li><input type="radio" name="q6" value="incorrect"> Chainsaw Man</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>7. What flavor from flying dolly was last eaten?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q7" value="incorrect"> Vanilla</li>
+                    <li><input type="radio" name="q7" value="incorrect"> Polar Ice</li>
+                    <li><input type="radio" name="q7" value="incorrect"> Mango</li>
+                    <li><input type="radio" name="q7" value="correct"> Polar Punch</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>8. What flavor are the Buccees mints?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q8" value="incorrect"> Blueberry</li>
+                    <li><input type="radio" name="q8" value="incorrect"> Raspberry</li>
+                    <li><input type="radio" name="q8" value="incorrect"> Apple</li>
+                    <li><input type="radio" name="q8" value="correct"> Cotton Candy</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>9. What day was The Crawfish Incident?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q9" value="correct"> May 18th</li>
+                    <li><input type="radio" name="q9" value="incorrect"> May 19th</li>
+                    <li><input type="radio" name="q9" value="incorrect"> May 17th</li>
+                    <li><input type="radio" name="q9" value="incorrect"> May 16th</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>10. How long is an ideal shower?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q10" value="incorrect"> 12 minutes</li>
+                    <li><input type="radio" name="q10" value="correct"> 13 minutes</li>
+                    <li><input type="radio" name="q10" value="incorrect"> 19 minutes</li>
+                    <li><input type="radio" name="q10" value="incorrect"> 1 hour</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>11. What is the Wordle you copied as word 1 in November 2023?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q11" value="incorrect"> Flake</li>
+                    <li><input type="radio" name="q11" value="correct"> Flick</li>
+                    <li><input type="radio" name="q11" value="incorrect"> Flunk</li>
+                    <li><input type="radio" name="q11" value="incorrect"> Arrow</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>12. What day was the first day of the Banff trip?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q12" value="incorrect"> November 23</li>
+                    <li><input type="radio" name="q12" value="correct"> November 22</li>
+                    <li><input type="radio" name="q12" value="incorrect"> November 24</li>
+                    <li><input type="radio" name="q12" value="incorrect"> November 21</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>13. What store played BTS in it?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q13" value="correct"> Walmart</li>
+                    <li><input type="radio" name="q13" value="incorrect"> HEB</li>
+                    <li><input type="radio" name="q13" value="incorrect"> Rouses</li>
+                    <li><input type="radio" name="q13" value="incorrect"> Albertsons</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>14. Social media is not real, the ___ is the same size as the car.</p>
+                <ul class="options">
+                    <li><input type="radio" name="q14" value="incorrect"> Fish</li>
+                    <li><input type="radio" name="q14" value="incorrect"> Bird</li>
+                    <li><input type="radio" name="q14" value="correct"> Duck</li>
+                    <li><input type="radio" name="q14" value="incorrect"> Llama</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>15. How often did I shampoo in October?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q15" value="incorrect"> Every other day</li>
+                    <li><input type="radio" name="q15" value="incorrect"> Twice a week</li>
+                    <li><input type="radio" name="q15" value="correct"> Daily</li>
+                    <li><input type="radio" name="q15" value="incorrect"> Once a week</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>16. What app were you blocked on for 10 minutes?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q16" value="inorrect"> Spotify</li>
+                    <li><input type="radio" name="q16" value="incorrect"> TikTok</li>
+                    <li><input type="radio" name="q16" value="incorrect"> Snapchat</li>
+                    <li><input type="radio" name="q16" value="correct"> Twitter</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>17. Finish the phrase: ____ ropes, polarized light.</p>
+                <ul class="options">
+                    <li><input type="radio" name="q17" value="correct"> Nine</li>
+                    <li><input type="radio" name="q17" value="incorrect"> Ten</li>
+                    <li><input type="radio" name="q17" value="incorrect"> Eight</li>
+                    <li><input type="radio" name="q17" value="incorrect"> Seven</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>18. What did Drake fake in the recent beef?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q18" value="incorrect"> A fake house</li>
+                    <li><input type="radio" name="q18" value="incorrect"> A fake wife</li>
+                    <li><input type="radio" name="q18" value="correct"> A fake kid</li>
+                    <li><input type="radio" name="q18" value="incorrect"> A fake album</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>19. What movie did I watch in Covington?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q19" value="correct"> Planet of the Apes</li>
+                    <li><input type="radio" name="q19" value="incorrect"> Harry Potter Rerun</li>
+                    <li><input type="radio" name="q19" value="incorrect"> Haikyuu</li>
+                    <li><input type="radio" name="q19" value="incorrect"> IF</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>20. What is the best number out of the following?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q20" value="incorrect"> 6</li>
+                    <li><input type="radio" name="q20" value="correct"> 22</li>
+                    <li><input type="radio" name="q20" value="incorrect"> 23</li>
+                    <li><input type="radio" name="q20" value="incorrect"> 8</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>21. What is Ed Sheeran's kids name?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q21" value="correct"> Jupiter</li>
+                    <li><input type="radio" name="q21" value="incorrect"> Saturn</li>
+                    <li><input type="radio" name="q21" value="incorrect"> Jasmine</li>
+                    <li><input type="radio" name="q21" value="incorrect"> Seashell</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>22. Nothing after ____ was real.</p>
+                <ul class="options">
+                    <li><input type="radio" name="q22" value="inorrect"> 2017</li>
+                    <li><input type="radio" name="q22" value="incorrect"> 2019</li>
+                    <li><input type="radio" name="q22" value="incorrect"> 2020</li>
+                    <li><input type="radio" name="q22" value="correct"> 2016</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>23. What does TCH stand for?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q23" value="incorrect"> Texas Childrens Hospital</li>
+                    <li><input type="radio" name="q23" value="correct"> The t0uch headquarters</li>
+                    <li><input type="radio" name="q23" value="incorrect"> The table head</li>
+                    <li><input type="radio" name="q23" value="incorrect"> The bachelor pad</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>24. What is the capital of Canada?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q24" value="correct"> Ottawa</li>
+                    <li><input type="radio" name="q24" value="incorrect"> Toronto</li>
+                    <li><input type="radio" name="q24" value="incorrect"> Vancouver</li>
+                    <li><input type="radio" name="q24" value="incorrect"> Montreal</li>
+                </ul>
+            </div>
+            <div class="question">
+                <p>25. What brand of cologne is in The Tube?</p>
+                <ul class="options">
+                    <li><input type="radio" name="q25" value="incorrect"> Dior</li>
+                    <li><input type="radio" name="q25" value="correct"> YSL</li>
+                    <li><input type="radio" name="q25" value="incorrect"> Tom Ford</li>
+                    <li><input type="radio" name="q25" value="incorrect"> Zara</li>
+                </ul>
+            </div>
+            <button type="button" class="submit-btn" onclick="gradeQuiz()">Submit</button>
+        </form>
+        <div class="result"></div>
+    </div>
+</body>
+</html>
